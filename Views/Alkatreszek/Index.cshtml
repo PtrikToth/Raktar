@@ -1,0 +1,73 @@
+﻿@model AlkatreszRaktar.Models.Kereses
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form>
+    <div class="row">
+        <div class="form-floating mb-3 col-md-6">
+            <input asp-for="MegnevezesKeres" class="form-control" id="floatingInput" placeholder="Megnevezés">
+            <label asp-for="MegnevezesKeres" class="ms-1">Megnevezés</label>
+        </div>
+        <div class="form-floating mb-3 col-md-6">
+            <select class="form-select" id="floatingSelect" aria-label="Kategória" asp-for="TipusKeres" asp-items="Model.TipusLista">
+                <option value="">Összes típus</option>
+            </select>
+            <label for="floatingSelect">Típus</label>
+        </div>
+        <div class="row justify-content-between m-0">
+            <button type="submit" class="btn btn-dark shadow-lg mb-3 col-md-5">Keresés</button>
+            <button asp-action="create" class="btn btn-dark shadow-lg mb-3 col-md-5">Új</button>
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AlkatreszLista[0].Megnevezes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlkatreszLista[0].Gyarto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlkatreszLista[0].Tipus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlkatreszLista[0].BeszerzesiAr)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.AlkatreszLista) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Megnevezes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gyarto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeszerzesiAr)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
